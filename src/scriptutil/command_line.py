@@ -44,7 +44,9 @@ def command_line(fn):
             optional_arguments_with_defaults = zip(optional_arguments, defaults)
 
         # Create a command line parser
-        parser = argparse.ArgumentParser()
+        doc = inspect.getdoc(fn)
+        description = doc.split('.')[0]+'.' if doc else ''
+        parser = argparse.ArgumentParser(description=description)
 
         # Configure required arguments
         for argument in required_arguments:
